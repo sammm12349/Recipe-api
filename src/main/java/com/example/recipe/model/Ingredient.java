@@ -21,4 +21,21 @@ public class Ingredient {
     @ManyToOne
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public Recipe getRecipe() {
+        return recipe;
+    }
 }

@@ -9,7 +9,6 @@ import java.util.List;
 
 
 @Entity
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "ingredient")
@@ -50,5 +49,29 @@ public class Recipe {
 
     public void setIngredient(List<Ingredient> ingredient) {
         this.ingredient = ingredient;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getServings() {
+        return servings;
+    }
+
+    public int getPrepTimeMinutes() {
+        return prepTimeMinutes;
+    }
+
+    public int getCalories() {
+        return calories;
+    }
+
+    public List<Ingredient> getIngredient() {
+        return ingredient;
     }
 }

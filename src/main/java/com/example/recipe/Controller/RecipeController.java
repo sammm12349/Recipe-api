@@ -1,6 +1,7 @@
 package com.example.recipe.Controller;
 
 
+import com.example.recipe.DTOmapping.RecipeDTO;
 import com.example.recipe.Service.IRecipeService;
 
 import com.example.recipe.model.Recipe;
@@ -22,28 +23,28 @@ public class RecipeController {
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Recipe>> getAllRecipes() {
-       List<Recipe> recipes = recipeService.getAllRecipes();
+    public ResponseEntity<List<RecipeDTO>> getAllRecipes() {
+       List<RecipeDTO> recipes = recipeService.getAllRecipes();
        return new ResponseEntity<>(recipes, HttpStatus.OK);
 
     }
 
     @GetMapping("/find/id/{id}")
-    public ResponseEntity<Recipe> getRecipeById(@PathVariable Long id) {
-        Recipe recipe = recipeService.getRecipeById(id);
+    public ResponseEntity<RecipeDTO> getRecipeById(@PathVariable Long id) {
+        RecipeDTO recipe = recipeService.getRecipeById(id);
         return new ResponseEntity<>(recipe, HttpStatus.OK);
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Recipe> addRecipe(@RequestBody Recipe recipe) {
-        Recipe savedRecipe = recipeService.addRecipe(recipe);
+    public ResponseEntity<RecipeDTO> addRecipe(@RequestBody Recipe recipe) {
+        RecipeDTO savedRecipe = recipeService.addRecipe(recipe);
         return new ResponseEntity<>(savedRecipe, HttpStatus.CREATED);
 
 
     }
     @PutMapping("/update/{id}")
-    public ResponseEntity<Recipe> updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
-        Recipe updaterecipe = recipeService.updateRecipeById(id, recipe);
+    public ResponseEntity<RecipeDTO> updateRecipe(@PathVariable Long id, @RequestBody Recipe recipe) {
+        RecipeDTO updaterecipe = recipeService.updateRecipeById(id, recipe);
         return new ResponseEntity<>(updaterecipe, HttpStatus.OK);
     }
     @DeleteMapping("/delete/{id}")
@@ -52,24 +53,24 @@ public class RecipeController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/find/ingredient")
-    public ResponseEntity<List<Recipe>> getRecipeByIngredientName(@RequestParam String ingredientName) {
-        List<Recipe> recipes = recipeService.findByIngredientName(ingredientName);
+    public ResponseEntity<List<RecipeDTO>> getRecipeByIngredientName(@RequestParam String ingredientName) {
+        List<RecipeDTO> recipes = recipeService.findByIngredientName(ingredientName);
         return new ResponseEntity<>(recipes, HttpStatus.OK);
 
     }
     @GetMapping("/find/calories")
-    public ResponseEntity<List<Recipe>> getRecipeByCalories(@RequestParam int calories) {
-        List<Recipe> recipes = recipeService.findByCalories(calories);
+    public ResponseEntity<List<RecipeDTO>> getRecipeByCalories(@RequestParam int calories) {
+        List<RecipeDTO> recipes = recipeService.findByCalories(calories);
         return new ResponseEntity<>(recipes, HttpStatus.OK);
     }
     @GetMapping("/find/name")
-    public ResponseEntity<List<Recipe>> getRecipeByRecipeName(@RequestParam String recipeName) {
-        List<Recipe> recipes = recipeService.findByName(recipeName);
+    public ResponseEntity<List<RecipeDTO>> getRecipeByRecipeName(@RequestParam String recipeName) {
+        List<RecipeDTO> recipes = recipeService.findByName(recipeName);
         return new ResponseEntity<>(recipes, HttpStatus.OK);
     }
     @GetMapping("/find/preptime")
-    public ResponseEntity<List<Recipe>> getRecipeByPrepTime(@RequestParam int prepTime) {
-        List<Recipe> recipes = recipeService.findByPrepTimeMinutes(prepTime);
+    public ResponseEntity<List<RecipeDTO>>getRecipeByPrepTime(@RequestParam int prepTime) {
+        List<RecipeDTO> recipes = recipeService.findByPrepTimeMinutes(prepTime);
         return new ResponseEntity<>(recipes, HttpStatus.OK);
     }
 
