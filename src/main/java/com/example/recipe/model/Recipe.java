@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @ToString(exclude = "ingredient")
 @Table(name = "recipe")
 public class Recipe {
@@ -26,6 +25,15 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Ingredient> ingredient = new ArrayList<>();
 
+
+    public Recipe(Long id, String name, int servings, int prepTimeMinutes, int calories, List<Ingredient> ingredient) {
+        this.id = id;
+        this.name = name;
+        this.servings = servings;
+        this.prepTimeMinutes = prepTimeMinutes;
+        this.calories = calories;
+        this.ingredient = ingredient;
+    }
 
     public Long getId() {
         return id;
@@ -75,12 +83,5 @@ public class Recipe {
         this.ingredient = ingredient;
     }
 
-    public Recipe(Long id, String name, int servings, int prepTimeMinutes, int calories, List<Ingredient> ingredient) {
-        this.id = id;
-        this.name = name;
-        this.servings = servings;
-        this.prepTimeMinutes = prepTimeMinutes;
-        this.calories = calories;
-        this.ingredient = ingredient;
-    }
+
 }
