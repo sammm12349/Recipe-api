@@ -117,4 +117,3 @@ src/
 
 Samuel Spear — [GitHub](https://github.com/sammm12349) | [LinkedIn](https://linkedin.com/in/samuel-spear)
 
-Samuel Spear — [LinkedIn](https://linkedin.com/in/samuel-spear-094606246) | [GitHub](https://github.com/sammm12349)
