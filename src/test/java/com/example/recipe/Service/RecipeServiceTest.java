@@ -18,8 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class RecipeServiceTest {
@@ -88,6 +87,42 @@ class RecipeServiceTest {
         assertEquals("Pasta", result.name());
         verify(recipeRepository).findById(1L);
         verify(recipeDTOMapper).apply(savedrecipe);
+
+    }
+
+    @Test
+    void updateRecipeSuccessfully() {
+        when(recipeRepository.existsById(1L)).thenReturn(true);
+        when(recipeRepository.save(recipe)).thenReturn(savedrecipe);
+        when(recipeDTOMapper.apply(savedrecipe)).thenReturn(recipeDTO);
+
+
+
+
+        RecipeDTO updatedResult = recipeService.updateRecipeById(1L,recipe);
+
+        assertNotNull(updatedResult);
+        assertEquals("Pasta", updatedResult.name());
+        verify(recipeRepository).existsById(1L);
+        verify(recipeRepository).save(recipe);
+        verify(recipeDTOMapper).apply(savedrecipe);
+
+
+
+
+    }
+
+    @Test void deleteRecipeSuccessfully() {
+        when(recipeRepository.existsById(1L)).thenReturn(true);
+        when(recipeRepository.findById(1L)).thenReturn(Optional.of(savedrecipe));
+        doNothing().when(recipeRepository).delete(savedrecipe);
+
+        recipeService.deleteRecipeById(1L);
+
+
+        verify(recipeRepository).existsById(1L);
+        verify(recipeRepository).findById(1L);
+        verify(recipeRepository).delete(savedrecipe);
 
     }
   
