@@ -12,5 +12,18 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
 
+  app:
+    build: .
+    container_name: recipe-app
+    ports:
+      - "3031:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/recipedb
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: admin123
+    depends_on:
+      - mysql
+
 volumes:
-  mysql-data: 
+  mysql-data:
