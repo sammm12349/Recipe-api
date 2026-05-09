@@ -7,6 +7,7 @@ import com.example.recipe.Repo.RecipeRepository;
 import com.example.recipe.model.Recipe;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,10 +28,14 @@ public class RecipeService implements IRecipeService {
 
     @Override
     public RecipeDTO addRecipe(Recipe recipe) {
+        if (recipe.getIngredient() != null) {
+            recipe.getIngredient().forEach(Ingredient -> Ingredient.setRecipe(recipe));
+        }
         return recipeDTOMapper.apply(recipeRepository.save(recipe));
     }
 
     @Override
+    @Transactional
     public List<RecipeDTO> getAllRecipes() {
         return recipeRepository.findAll()
                 .stream()
@@ -39,6 +44,7 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
+    @Transactional
     public RecipeDTO getRecipeById(Long id) {
         return recipeRepository.findById(id)
                 .map(recipeDTOMapper)
@@ -65,6 +71,7 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
+    @Transactional
     public List<RecipeDTO> findByIngredientName(String ingredientName) {
         if(ingredientName == null || ingredientName.isBlank()) {
             throw new RecipeNotFoundException("Recipe not found");
@@ -76,6 +83,7 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
+    @Transactional
     public List<RecipeDTO> findByCalories(int calories) {
         if(calories <= 0) {
             throw new RecipeNotFoundException("Calories can't be less than 0");
@@ -87,6 +95,7 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
+    @Transactional
     public List<RecipeDTO> findByName(String name) {
         if(name == null || name.isBlank()) {
             throw new RecipeNotFoundException("Recipe not found");
@@ -98,6 +107,7 @@ public class RecipeService implements IRecipeService {
     }
 
     @Override
+    @Transactional
     public List<RecipeDTO> findByPrepTimeMinutes (int prepTimeMinutes) {
         if(prepTimeMinutes <= 0) {
             throw new RecipeNotFoundException("Prep time minutes can't be less than 0");

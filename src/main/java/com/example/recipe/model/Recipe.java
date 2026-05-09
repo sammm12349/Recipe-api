@@ -9,7 +9,6 @@ import java.util.List;
 
 
 @Entity
-@NoArgsConstructor
 @ToString(exclude = "ingredient")
 @Table(name = "recipe")
 public class Recipe {
@@ -22,9 +21,10 @@ public class Recipe {
     private int prepTimeMinutes;
     private int calories;
 
-    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "recipe",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Ingredient> ingredient = new ArrayList<>();
-
+    public Recipe() {
+    }
 
     public Recipe(Long id, String name, int servings, int prepTimeMinutes, int calories, List<Ingredient> ingredient) {
         this.id = id;

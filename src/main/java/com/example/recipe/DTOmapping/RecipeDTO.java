@@ -1,6 +1,5 @@
 package com.example.recipe.DTOmapping;
 
-import com.example.recipe.model.Ingredient;
 
 import java.util.List;
 
